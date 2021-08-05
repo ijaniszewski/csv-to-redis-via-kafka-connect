@@ -1,0 +1,13 @@
+{
+    "name": "source_csv_movies_connector",
+    "config": {
+        "connector.class": "com.github.jcustenborder.kafka.connect.spooldir.SpoolDirCsvSourceConnector",
+        "finished.path": "${file:/credentials.properties:finished_path}",
+        "input.path": "${file:/credentials.properties:input_path}",
+        "error.path": "${file:/credentials.properties:error_path}",
+        "input.file.pattern": "game_movies-\\d+[.]csv",
+        "topic": "movies",
+        "key.schema": "{\n  \"name\" : \"com.example.movies.MovieKey\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n",
+        "value.schema": "{\n  \"name\" : \"com.example.movies.Movie\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"title\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"id_game\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n"
+    }
+}

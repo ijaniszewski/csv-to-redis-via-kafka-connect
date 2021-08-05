@@ -1,0 +1,13 @@
+{
+    "name": "source_csv_comments_connector",
+    "config": {
+        "connector.class": "com.github.jcustenborder.kafka.connect.spooldir.SpoolDirCsvSourceConnector",
+        "finished.path": "${file:/credentials.properties:finished_path}",
+        "input.path": "${file:/credentials.properties:input_path}",
+        "error.path": "${file:/credentials.properties:error_path}",
+        "input.file.pattern": "comments-\\d+[.]csv",
+        "topic": "comments",
+        "key.schema": "{\n  \"name\" : \"com.example.comments.CommentsKey\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_comment\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n",
+        "value.schema": "{\n  \"name\" : \"com.example.users.Comment\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_comment\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"user\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n"
+    }
+}

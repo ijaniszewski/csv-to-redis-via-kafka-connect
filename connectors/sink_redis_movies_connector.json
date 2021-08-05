@@ -1,0 +1,12 @@
+{
+    "name": "sink_redis_movies_connector",
+    "config": {
+        "topics": "movies",
+        "connector.class": "com.datamountaineer.streamreactor.connect.redis.sink.RedisSinkConnector",
+        "tasks.max": "1",
+        "connect.redis.error.policy": "RETRY",
+        "connect.redis.host": "redis",
+        "connect.redis.port": "6379",
+        "connect.redis.kcql": "INSERT INTO movie- SELECT * FROM movies PK id_movie;"
+    }
+}

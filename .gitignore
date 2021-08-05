@@ -1,0 +1,12 @@
+venv/
+.vscode/
+__pycache__/
+.cache/
+
+# Directories with data
+csv_data/*
+!csv_data/error/.keep
+!csv_data/finished/.keep
+!csv_data/input/.keep
+
+.DS_Store
