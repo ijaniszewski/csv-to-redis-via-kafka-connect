@@ -76,6 +76,12 @@ services:
         hostname: redis
         volumes:
             - redis_data:/data
+
+    python:
+      build:
+          context: ./python_docker/
+          dockerfile: ./Dockerfile
+      tty: true
     
 volumes:
     redis_data:

@@ -8,6 +8,13 @@
         "input.file.pattern": "game_movies-\\d+[.]csv",
         "topic": "movies",
         "key.schema": "{\n  \"name\" : \"com.example.movies.MovieKey\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n",
-        "value.schema": "{\n  \"name\" : \"com.example.movies.Movie\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"title\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"id_game\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n"
+        "value.schema": "{\n  \"name\" : \"com.example.movies.Movie\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"title\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"id_game\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n",
+        "transforms": "filterHeaders,castCommentID",
+        "transforms.filterHeaders.type": "io.confluent.connect.transforms.Filter$Value",
+        "transforms.filterHeaders.filter.condition": "$[?(@.id_movie == \"id_movie\")]",
+        "transforms.filterHeaders.filter.type": "exclude",
+        "transforms.filterHeaders.missing.or.null.behavior": "fail",
+        "transforms.castCommentID.type": "org.apache.kafka.connect.transforms.Cast$Value",
+        "transforms.castCommentID.spec": "id_movie:int64,id_game:int64"
     }
 }

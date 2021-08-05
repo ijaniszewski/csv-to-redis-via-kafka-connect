@@ -1,5 +1,8 @@
 FROM confluentinc/cp-kafka-connect:5.5.3
 
+# Install transforms
+RUN confluent-hub install --no-prompt confluentinc/connect-transforms:latest
+
 # Copying Redis Sink Connector
 RUN mkdir -p /usr/share/redis-sink
 COPY kafka-connect-redis-1.2.2-2.1.0-all.jar /usr/share/redis-sink/

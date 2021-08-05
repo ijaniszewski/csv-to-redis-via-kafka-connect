@@ -8,6 +8,13 @@
         "input.file.pattern": "comments-\\d+[.]csv",
         "topic": "comments",
         "key.schema": "{\n  \"name\" : \"com.example.comments.CommentsKey\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_comment\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n",
-        "value.schema": "{\n  \"name\" : \"com.example.users.Comment\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_comment\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"user\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n"
+        "value.schema": "{\n  \"name\" : \"com.example.users.Comment\",\n  \"type\" : \"STRUCT\",\n  \"isOptional\" : false,\n  \"fieldSchemas\" : {\n    \"id_comment\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"user\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    },\n    \"id_movie\" : {\n      \"type\" : \"STRING\",\n      \"isOptional\" : false\n    }\n  }\n}\n",
+        "transforms": "filterHeaders,castCommentID",
+        "transforms.filterHeaders.type": "io.confluent.connect.transforms.Filter$Value",
+        "transforms.filterHeaders.filter.condition": "$[?(@.id_comment == \"id_comment\")]",
+        "transforms.filterHeaders.filter.type": "exclude",
+        "transforms.filterHeaders.missing.or.null.behavior": "fail",
+        "transforms.castCommentID.type": "org.apache.kafka.connect.transforms.Cast$Value",
+        "transforms.castCommentID.spec": "id_comment:int64,id_movie:int64"
     }
 }
