@@ -13,17 +13,17 @@ docker-compose up
 
 2. Deploy connectors on Kafka Connect Node
 ```
-docker exec -it new_kafka_connect_infra_connect_1 bash deploy_connectors.sh
+docker exec -it connect_container bash deploy_connectors.sh
 ```
 
 3. Check if there are keys in Redis
 ```
-docker exec -it new_kafka_connect_infra_redis_1 redis-cli KEYS "movie-14*"
+docker exec -it redis_container redis-cli KEYS "movie-14*"
 ```
 
 4. Run python script to check Movie ID in Redis database (use your own ID)
 ```
-docker exec -it new_kafka_connect_infra_python_1 python get_data_from_redis.py --movie_id 1
+docker exec -it python_container python get_data_from_redis.py --movie_id 1
 ```
 <br><br>
 Inspirations & sources:
@@ -56,7 +56,7 @@ docker container ps
 
 connect to Kafka Broker
 ```
-docker exec -it new_kafka_connect_infra_kafka_1 bash
+docker exec -it kafka_container bash
 ```
 
 check topics from Kafka Broker
@@ -66,7 +66,7 @@ kafka-topics --list --zookeeper zookeeper:2181
 
 connect to Connect Node
 ```
-docker exec -it new_kafka_connect_infra_connect_1 bash
+docker exec -it connect_container bash
 ```
 
 check connectors
@@ -119,7 +119,7 @@ docker container prune
 
 remove docker image
 ```
-docker image rm new_kafka_connect_infra_connect
+docker image rm connect_container
 ```
 
 remove all docker volumes
@@ -129,7 +129,7 @@ docker volume rm $(docker volume ls -q)
 
 connect to Redis Node
 ```
-docker exec -it new_kafka_connect_infra_redis_1 redis-cli
+docker exec -it redis_container redis-cli
 ```
 
 check Redis Keys

@@ -1,9 +1,10 @@
-version: "3.9"
+version: "3.0"
 
 services:
     kafka:
         hostname: kafka
         image: confluentinc/cp-enterprise-kafka:5.0.0
+        container_name: kafka_container
         depends_on:
           - zookeeper
         environment:
@@ -33,6 +34,7 @@ services:
           ZOOKEEPER_TICK_TIME: "2000"
     connect:
         hostname: connect
+        container_name: connect_container
         build:
             context: ./kafka_connect/
             dockerfile: ./Dockerfile
@@ -72,12 +74,14 @@ services:
 
     redis:
         image: redis:4.0.5-alpine
+        container_name: redis_container
         command: ["redis-server", "--appendonly", "yes"]
         hostname: redis
         volumes:
             - redis_data:/data
 
     python:
+      container_name: python_container
       build:
           context: ./python_docker/
           dockerfile: ./Dockerfile
